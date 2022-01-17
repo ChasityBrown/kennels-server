@@ -121,8 +121,6 @@ class HandleRequests(BaseHTTPRequestHandler):
         # Parse the URL
         (resource, id) = self.parse_url(self.path)
 
-        # Initialize new animal
-        new_animal = None
 
         # Add a new animal to the list. Don't worry about
         # the orange squiggle, you'll define the create_animal
@@ -131,21 +129,7 @@ class HandleRequests(BaseHTTPRequestHandler):
             new_animal = create_animal(post_body)
 
         # Encode the new animal and send in response
-        self.wfile.write(f"{new_animal}".encode())
-
-    def do_POST(self):
-        self._set_headers(201)
-        content_len = int(self.headers.get('content-length', 0))
-        post_body = self.rfile.read(content_len)
-
-        # Convert JSON string to a Python dictionary
-        post_body = json.loads(post_body)
-
-        # Parse the URL
-        (resource, id) = self.parse_url(self.path)
-
-        # Initialize new employee
-        new_employee = None
+            self.wfile.write(f"{new_animal}".encode())
 
         # Add a new employee to the list. Don't worry about
         # the orange squiggle, you'll define the create_employee
@@ -154,44 +138,13 @@ class HandleRequests(BaseHTTPRequestHandler):
             new_employee = create_employee(post_body)
 
         # Encode the new employee and send in response
-        self.wfile.write(f"{new_employee}".encode())
+            self.wfile.write(f"{new_employee}".encode())
 
-    def do_POST(self):
-        self._set_headers(201)
-        content_len = int(self.headers.get('content-length', 0))
-        post_body = self.rfile.read(content_len)
-
-        # Convert JSON string to a Python dictionary
-        post_body = json.loads(post_body)
-
-        # Parse the URL
-        (resource, id) = self.parse_url(self.path)
-
-        # Initialize new location
-        new_location = None
-
-        # Add a new location to the list. Don't worry about
-        # the orange squiggle, you'll define the create_location
-        # function next.
         if resource == "locations":
             new_location = create_location(post_body)
 
         # Encode the new location and send in response
-        self.wfile.write(f"{new_location}".encode())
-
-    def do_POST(self):
-        self._set_headers(201)
-        content_len = int(self.headers.get('content-length', 0))
-        post_body = self.rfile.read(content_len)
-
-        # Convert JSON string to a Python dictionary
-        post_body = json.loads(post_body)
-
-        # Parse the URL
-        (resource, id) = self.parse_url(self.path)
-
-        # Initialize new customer
-        new_customer = None
+            self.wfile.write(f"{new_location}".encode())
 
         # Add a new customer to the list. Don't worry about
         # the orange squiggle, you'll define the create_customer
@@ -200,7 +153,7 @@ class HandleRequests(BaseHTTPRequestHandler):
             new_customer = create_customer(post_body)
 
         # Encode the new customer and send in response
-        self.wfile.write(f"{new_customer}".encode())
+            self.wfile.write(f"{new_customer}".encode())
 
     # Here's a method on the class that overrides the parent's method.
     # It handles any PUT request.
