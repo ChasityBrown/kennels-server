@@ -6,25 +6,25 @@ ANIMALS = [
     {
         "id": 1,
         "name": "Snickers",
-        "species": "Dog",
-        "locationId": 1,
-        "customerId": 4,
+        "breed": "Dog",
+        "location_id": 1,
+        "customer_id": 4,
         "status": "Admitted"
     },
     {
         "id": 2,
         "name": "Gypsy",
-        "species": "Dog",
-        "locationId": 1,
-        "customerId": 2,
+        "breed": "Dog",
+        "location_id": 1,
+        "customer_id": 2,
         "status": "Admitted"
     },
     {
         "id": 3,
         "name": "Blue",
-        "species": "Cat",
-        "locationId": 2,
-        "customerId": 1,
+        "breed": "Cat",
+        "location_id": 2,
+        "customer_id": 1,
         "status": "Admitted"
     }
 ]
@@ -119,19 +119,14 @@ def create_animal(animal):
     return animal
 
 def delete_animal(id):
-    # Initial -1 value for animal index, in case one isn't found
-    animal_index = -1
+    with sqlite3.connect("./kennel.sqlite3") as conn:
+        db_cursor = conn.cursor()
 
-    # Iterate the ANIMALS list, but use enumerate() so that you
-    # can access the index value of each item
-    for index, animal in enumerate(ANIMALS):
-        if animal["id"] == id:
-            # Found the animal. Store the current index.
-            animal_index = index
+        db_cursor.execute("""
+        DELETE FROM animal
+        WHERE id = ?
+        """, (id, ))
 
-    # If the animal was found, use pop(int) to remove it from list
-    if animal_index >= 0:
-        ANIMALS.pop(animal_index)
         
 def update_animal(id, new_animal):
     # Iterate the ANIMALS list, but use enumerate() so that
